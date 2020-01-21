@@ -20,7 +20,8 @@ namespace HackUniverse.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            MiniProjectContext context = HttpContext.RequestServices.GetService(typeof(MiniProjectContext)) as MiniProjectContext;
+            return View(context.GetAllHackathons());
         }
 
         public IActionResult Privacy()
