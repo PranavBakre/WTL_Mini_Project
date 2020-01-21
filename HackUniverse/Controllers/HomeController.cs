@@ -18,10 +18,22 @@ namespace HackUniverse.Controllers
             _logger = logger;
         }
 
+
         public IActionResult Index()
         {
             HackathonContext context = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
             return View(context.GetAllHackathons());
+        }
+
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<script>
+    function NextPage() {
+        document.getElementById("R2").style.display = "block"
+        document.getElementById("R1").style.display = "none"
+        return true
+    }
+</script>
+
+
+<form name="register" style="min-height: 300px;width:320px;" class="mx-auto my-auto card" asp-controller="User" asp-action="Register" method="post">
+    
+    <div id="R1" class="card-body" style="margin-top:15%;text-align:center">
+        <div class="card-title"><h3>Register</h3></div>
+        <div class="card-body">
+            <h6>Username</h6>
+            <input style="width:100%" type="text" name="username" placeholder="UserName" />
+            <br />
+            <br />
+            <h6>Email</h6>
+            <input style="width:100%" type="email" name="email" placeholder="Email" />
+            <br />
+            <br />
+            <h6>Password</h6>
+            <input style="width:100%" type="password" placeholder="Password" name="password" />
+            <br />
+            <br />
+            <h6>Confirm Password</h6>
+            <input style="width:100%" type="password" placeholder="Confirm" name="Verify" />
+            <br />
+            <br />
+            <button class="btn btn-primary" type="button" onclick="return NextPage()">Next</button>
+
+        </div>
+
+        
+    </div>
+    
+    <div id="R2" class="card-body" style="display:none ;text-align:center;">
+        <h6>First Name:</h6>
+        <input style="width:100%" type="text" name="FirstName" />
+        <br />
+        <h6>Last Name:</h6>
+        <input style="width:100%" type="text" name="LastName" />
+        <br />
+        <h6>Occupation:</h6>
+        <input style="width:100%" type="text" name="Occupation" />
+        <br />
+        <h6>Organization Name:</h6>
+        <input style="width:100%" type="text" name="OrganizationName" />
+        <br />
+        <h6>Profile Picture:</h6>
+        <input style="width:100%" type="file" accept="image/*" name="ProfilePicture" />
+        <br />
+        <br />
+        <select name="UserType">
+            <option value="C">Hackathon Creator</option>
+            <option value="P">Hackathon Participant</option>
+        </select>
+        <br />
+        <br />
+        <br />
+        
+        <input class="btn btn-primary"type="submit" name="submit" />
+        <br />
+        </div>
+</form>

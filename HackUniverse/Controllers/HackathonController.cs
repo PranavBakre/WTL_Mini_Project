@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using HackUniverse.Models;
+using HackUniverse.Models.ProblemStatements;
+using System.Dynamic;
 namespace HackUniverse.Controllers
 {
     [Route("api/[controller]")]
@@ -30,9 +32,15 @@ namespace HackUniverse.Controllers
         {
             
             TempData["id"] =hid;
-            HackathonContext context = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
+            HackathonContext hackathonContext = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
+            Hackathon Selection = hackathonContext.GetByID(hid);
+            ProblemStatementContext problemStatementContext = HttpContext.RequestServices.GetService(typeof(ProblemStatementContext)) as ProblemStatementContext;
+            var SelectionPS = problemStatementContext.GetProblemStatementsById(hid);
             
-                return View(context.GetByID(hid));
+            dynamic JointModel = new ExpandoObject();
+            JointModel.ProblemStatements = SelectionPS;
+            JointModel.Hackathon = Selection;
+            return View(JointModel);
         }
     }
 }

@@ -18,5 +18,7 @@ namespace HackUniverse.Models.User
             {
                 return new MySqlConnection(ConnectionString);
             }
+
+
         }
 }

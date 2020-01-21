@@ -1,17 +1,54 @@
-﻿@model Hackathon
+﻿@model dynamic
 @{
-    ViewData["Title"] = Model.Title;
+    ViewData["Title"] = Model.Hackathon.Title;
 }
     <div style="height:100%">
-        <img src="~/Images/Hackathons/AGScover.gif" style="width:95%;height:30%" />
+        <img src="~/Images/Hackathons/cover@(Model.Hackathon.Id).png" style="width:100%;height:30%" />
         <div style="width:100%;text-align:center;display:inline-flex;">
-            <img src="~/Images/Hackathons/AGS.png" style="margin-right:10%">
-            <h1 class="my-auto">@Model.Title</h1>
-
+            <img src="~/Images/Hackathons/thumb@(Model.Hackathon.Id).png" style="margin-right:10%">
+            <h1 class="my-auto">@Model.Hackathon.Title</h1>
         </div>
-        <h6>@Model.Subtitle</h6>
+        <h5>@Model.Hackathon.Subtitle</h5>
         <hr />
-        <h6>@Model.Description</h6>
+        <blockquote>@Model.Hackathon.Description</blockquote>
+        <hr />
+        <div style="text-align:center;display: inline-flex;width:100%">
+            <div style="text-align:left;width:30%"><b>Start Date : </b>@Model.Hackathon.StartDate</div>
+            <div style="width:40%">
+                <button class="btn btn-primary">Register</button>
+
+            </div>
+            <div style="text-align:right;width:30%"><b>End Date : </b>@Model.Hackathon.EndDate</div>
+        </div>
+        <hr />
+        <br />
+        <br />
+        <h5>Problem Statements</h5>
+
+        <hr />
+        @for (int i = 0; i < @Model.ProblemStatements.Count; i++)
+        {
+
+           <p>
+                <b>@Model.ProblemStatements[i].Category</b>
+                <br />
+                <b>@Model.ProblemStatements[i].problemStatement</b>
+                <br />
+                @Model.ProblemStatements[i].Description
+                <br />
+            </p>
+            <hr />
+
+        }
+
+    <div style="display:inline-flex">
+        Contact Us at: &nbsp<div style="color:blue"> @Model.Hackathon.ContactMail </div>&nbsp or &nbsp<div style="color:blue"> @Model.Hackathon.ContactPhone </div>.
+        &nbspFor More info visit &nbsp<a style="color:blue" href='@Model.Hackathon.ContactWebsite'>@Model.Hackathon.ContactWebsite</a>
+    </div>
+
+
+
+
     </div>
     
 

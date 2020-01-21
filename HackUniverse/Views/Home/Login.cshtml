@@ -3,5 +3,30 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
 
+
+<div>
+    <form class="mx-auto my-auto card"
+            style="width:320px;height:390px;text-align:center;"
+          asp-controller="User" asp-action="Login" method="post">
+        <div style="margin-top:20%">
+
+            <div class="card-title"><h3>Login</h3></div>
+            <div class="card-body">
+                <h6>Username</h6>
+                <input type="text" name="username" placeholder="UserName" />
+                <br />
+                <br />
+                <h6>Password</h6>
+                <input placeholder="Password" type="password" name="password" />
+                <br />
+                <br />
+                <br />
+                
+                <input class="btn-primary" type="submit" />
+                
+            </div>
+            
+        </div>
+    </form>
+</div>

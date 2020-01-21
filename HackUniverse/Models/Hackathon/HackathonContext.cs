@@ -35,6 +35,7 @@ namespace HackUniverse.Models
                     read.Read();
                     return new Hackathon
                     {
+                        Id = Convert.ToInt32(read["Id"].ToString()),
                         Title = read["Title"].ToString(),
                         Subtitle = read["Subtitle"].ToString(),
                         Description = read["Description"].ToString(),
@@ -78,7 +79,7 @@ namespace HackUniverse.Models
                             EndDate = (System.DateTime)reader["EndDate"]
 
 
-                        }); ;
+                        });
                     }
                     conn.Close();
                 }
