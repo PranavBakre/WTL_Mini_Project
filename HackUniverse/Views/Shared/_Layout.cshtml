@@ -18,16 +18,16 @@
                 </button>
                 <div id="main" class="navbar-collapse collapse d-sm-inline-flex navbar ">
                     <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse navbar-toggleable-sm">
-                        <li class="nav-item" style="width:10%;text-align:right">
+                        <li class="nav-item col-sm-3 col-md-3 col-lg-2" style="width:10%;text-align:right">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
 
-                        <li class="nav-item" style="width:10%;text-align:right">
+                        <li class="nav-item  col-sm-3 col-md-3 col-lg-2" style="width:10%;text-align:right">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
                         </li>
 
                         <li>
-                            <a class="navbar-toggler nav-link text-dark" data-toggle="collapse" data-target="#Search" aria-expanded="false">Search</a>
+                            <a class="navbar-toggler nav-link text-dark"  data-toggle="collapse" data-target="#Search" aria-expanded="false">Search</a>
                         </li>
 
                         <li id="Search" class="nav-item navbar-collapse collapse" style="width:75%">
@@ -37,19 +37,20 @@
                                                                                                 box-shadow:0 0 10px;
                                                                                                 border-radius:30px;
                                                                                                 ">
-                                <input class="S" type="text" style="border:none;
-                                                          border-bottom-left-radius:30px;
-                                                          border-top-left-radius:30px;
-                                                          width:90%;
-                                                          padding-left:2em;
-                                                          outline:none;" />
-                                <button type="submit" style="border:none;
-                                                          border-bottom-right-radius:30px;
-                                                          border-top-right-radius:30px;
-                                                          width:10%;
-                                                          color:cadetblue;
-                                                          background-color:lightgoldenrodyellow;
-                                                          outline:none">
+                                <input class="S" type="text" style="        border: none;
+        border-bottom-left-radius: 30px;
+        border-top-left-radius: 30px;
+        width: 90%;
+        padding-left: 2em;
+        outline: none;" />
+                                <button type="submit" style="        border: none;
+        border-bottom-right-radius: 30px;
+        border-top-right-radius: 30px;
+        width: 10%;
+        min-width: 2.5em;
+        color: cadetblue;
+        background-color: lightgoldenrodyellow;
+        outline: none">
                                     Go
                                 </button>
                             </form>

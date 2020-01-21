@@ -7,6 +7,7 @@
     <!--<h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>-->
     
+        
         <h6>Current Hackathons</h6>
         <div class="card-columns">
             @{
@@ -16,22 +17,23 @@
                     if (item.StartDate.Date.CompareTo(DateTime.Today.Date) == 0)
                     {
                         counter++;
-                        <a asp-controller="Hackathon" asp-action="?Id=@item.Id">
-                            <div class="card">
+                        <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
+                            <div class="card" style="max-height: 5em;">
                                 <div class="card-body">
 
                                     <h5 class="card-title">@item.Title</h5>
                                 </div>
-    
+
                             </div>
                         </a>
                     }
-                    if (counter == 0)
-                    {
-                        <div>No Hackathons Today</div>
-                        }
-                    }
+
                 }
+                if (counter == 0)
+                {
+                    <div>No Hackathons Today</div>
+                }
+            }
         </div>
 </div>
     <h6>Previous Hackathons</h6>
@@ -40,33 +42,35 @@
         {
             if (item.StartDate.Date.CompareTo(DateTime.Today.Date) < 0)
             {
-        <a asp-controller="Hackathon" asp-action="View/@item.Id">
-            <div class="card">
-                <div class="card-body">
+                <a  asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id"  >
 
-                    <h5 class="card-title">@item.Title</h5>
+                <div class="card" style="max-height: 5em;">
+                    <div class="card-body">
+
+                        <h5 class="card-title">@item.Title</h5>
+                    </div>
+
                 </div>
-
-            </div>
             </a>
             }
-            }
-</div>
+        }
+    </div>
 
     <h6>Next Hackathons</h6>
     <div class="card-columns">
         @foreach (var item in Model)
         {
             if (item.StartDate.Date.CompareTo(DateTime.Today.Date) > 0)
-            {<a asp-controller="Hackathon" asp-action="?Id=@item.Id">
-    <div class="card">
-        <div class="card-body">
+            {
+                <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
+                <div class="card" style="height: 6em;">
+                    <div class="card-body">
 
-            <h5 class="card-title">@item.Title</h5>
-        </div>
+                        <h5 class="card-title">@item.Title</h5>
+                    </div>
 
-    </div>
+                </div>
         </a>
-    }
+        }
     }
 </div>

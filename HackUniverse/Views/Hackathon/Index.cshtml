@@ -1,0 +1,17 @@
+﻿@model Hackathon
+@{
+    ViewData["Title"] = Model.Title;
+}
+    <div style="height:100%">
+        <img src="~/Images/Hackathons/AGScover.gif" style="width:95%;height:30%" />
+        <div style="width:100%;text-align:center;display:inline-flex;">
+            <img src="~/Images/Hackathons/AGS.png" style="margin-right:10%">
+            <h1 class="my-auto">@Model.Title</h1>
+
+        </div>
+        <h6>@Model.Subtitle</h6>
+        <hr />
+        <h6>@Model.Description</h6>
+    </div>
+    
+

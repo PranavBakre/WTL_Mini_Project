@@ -5,15 +5,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using static System.Net.Mime.MediaTypeNames;
 
 namespace HackUniverse.Models
 {
 #nullable enable
-    public class MiniProjectContext
+    public class HackathonContext
     {
         public String ConnectionString { get; set; }
-        public MiniProjectContext ( string connectionString)
+        public HackathonContext ( string connectionString)
         {
             ConnectionString = connectionString;
         }
@@ -22,6 +23,34 @@ namespace HackUniverse.Models
         {
             return new MySqlConnection(ConnectionString);
         }
+
+        public Hackathon GetByID(int id)
+        {
+            using (MySqlConnection connection = GetConnecton())
+            {
+                connection.Open();
+                var cmd = new MySqlCommand($"select * from Hackathon where Id='{id}'",connection);
+                using (var read = cmd.ExecuteReader())
+                {
+                    read.Read();
+                    return new Hackathon
+                    {
+                        Title = read["Title"].ToString(),
+                        Subtitle = read["Subtitle"].ToString(),
+                        Description = read["Description"].ToString(),
+                        ContactMail = read["ContactMail"].ToString(),
+                        ContactPhone = read["ContactPhone"].ToString(),
+                        ContactWebsite = read["ContactWebsite"].ToString(),
+                        CoverPhoto = utilities.ObjecttoByteArray(read["CoverPhoto"]),
+                        Thumbnail = utilities.ObjecttoByteArray(read["Thumbnail"]),
+                        StartDate = (System.DateTime)read["StartDate"],
+                        EndDate = (System.DateTime)read["EndDate"]
+                    };
+                }
+                connection.Close();
+            }
+        }
+
 
         public List<Hackathon> GetAllHackathons()
         {
@@ -51,6 +80,7 @@ namespace HackUniverse.Models
 
                         }); ;
                     }
+                    conn.Close();
                 }
             }
             return list;

@@ -20,7 +20,7 @@ namespace HackUniverse.Controllers
 
         public IActionResult Index()
         {
-            MiniProjectContext context = HttpContext.RequestServices.GetService(typeof(MiniProjectContext)) as MiniProjectContext;
+            HackathonContext context = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
             return View(context.GetAllHackathons());
         }
 
