@@ -20,7 +20,7 @@ namespace HackUniverse.Controllers
         
  
 
-        public HackathonController(ILogger<HomeController> logger)
+        public HackathonController(ILogger<HackathonController> logger)
         {
             _logger = logger;
         }

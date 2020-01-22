@@ -32,7 +32,7 @@ namespace HackUniverse.Models.ProblemStatements
                 {
                     while (read.Read())
                     {
-                        list.Add(new ProblemStatement()
+                        list.Add(new ProblemStatement
                         {
                             Id = Convert.ToInt32(read["Id"]),
                             HackathonId = Convert.ToInt32(read["HackathonId"]),

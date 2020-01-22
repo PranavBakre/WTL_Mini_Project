@@ -18,16 +18,25 @@
                 </button>
                 <div id="main" class="navbar-collapse collapse d-sm-inline-flex navbar ">
                     <ul class="navbar-nav flex-grow-1 flex-sm-row-reverse navbar-toggleable-sm">
-                        <li class="nav-item" style="width:10%;text-align:right">
-                            <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
-                        </li>
+                        @if (ViewData["Name"] == null)
+                        {
+                            <li class="nav-item" style="width:10%;text-align:right">
+                                <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            </li>
 
-                        <li class="nav-item" style="width:10%;text-align:right">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
-                        </li>
+                            <li class="nav-item" style="width:10%;text-align:right">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="width:10%;text-align:right">
+                                <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="" asp-action="">@ViewData["Name"]</a>
+                            </li>
 
+                        }
                         <li>
-                            <a class="navbar-toggler nav-link text-dark"  data-toggle="collapse" data-target="#Search" aria-expanded="false">Search</a>
+                            <a class="navbar-toggler nav-link text-dark" data-toggle="collapse" data-target="#Search" aria-expanded="false">Search</a>
                         </li>
 
                         <li id="Search" class="nav-item navbar-collapse collapse" style="width:75%">
@@ -37,7 +46,7 @@
                                                                                                 box-shadow:0 0 10px;
                                                                                                 border-radius:30px;
                                                                                                 ">
-                                <input class="S" type="text" style="        border: none;
+                                <input name="S" type="text" style="        border: none;
                                                                             border-bottom-left-radius: 30px;
                                                                             border-top-left-radius: 30px;
                                                                             width: 90%;

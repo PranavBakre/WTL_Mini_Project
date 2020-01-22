@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HackUniverse.Models;
+using Microsoft.AspNetCore.Http;
+using HackUniverse.Models.User;
+using HackUniverse.Models.Hackathon_User_Interactions;
+using System.Dynamic;
 
 namespace HackUniverse.Controllers
 {
@@ -21,8 +25,28 @@ namespace HackUniverse.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Name"]=HttpContext.Session.GetString("UName");
+            UserContext userContext = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
             HackathonContext context = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
-            return View(context.GetAllHackathons());
+            Hackathon_UserContext HuContext = HttpContext.RequestServices.GetService(typeof(Hackathon_UserContext)) as Hackathon_UserContext;
+            dynamic user=null;
+            var UserHackathons = new List<Hackathon>();
+            if (ViewData["Name"] != null)
+            {
+                user = userContext.GetUserByUserName(ViewData["Name"].ToString());
+                var UserHackathonList = HuContext.GetUserHackathons(user);
+                foreach (int i in UserHackathonList)
+                {
+                    UserHackathons.Add(context.GetByID(i));
+                }
+
+            }
+
+            
+            dynamic Model = new ExpandoObject();
+            Model.UserHackathonList=UserHackathons ;
+            Model.Hackathons = context.GetAllHackathons();
+            return View(Model);
         }
 
 

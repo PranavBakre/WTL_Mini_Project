@@ -1,18 +1,52 @@
-﻿@model IEnumerable<Hackathon>
+﻿@model dynamic
 @{
+
     ViewData["Title"] = "Home Page";
 }
 
-<div>
-    <!--<h1 class="display-4">Welcome</h1>
+    <div>
+        <!--<h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>-->
-    
-        
+
+
+        @{
+            if (Model.UserHackathonList.Count != 0)
+            {
+                <br />
+                <br />
+
+                <h6>Your Hackathons</h6>
+                <div class="card-columns">
+
+                    @foreach (var item in Model.UserHackathonList)
+                    {
+
+                        <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
+                            <div class="card" style="max-height: 5em;">
+                                <div class="card-body">
+
+                                    <h5 class="card-title">@item.Title</h5>
+                                </div>
+
+                            </div>
+                        </a>
+
+
+                    }
+
+                </div>
+            }
+        }
+        <br />
+        <br />
         <h6>Current Hackathons</h6>
-        <div class="card-columns">
+        <br />
+        <br />
+        <div class="card-columns" style="text-align:left">
             @{
+
                 int counter = 0;
-                @foreach (var item in Model)
+                @foreach (var item in Model.Hackathons)
                 {
                     if (item.StartDate.Date.CompareTo(DateTime.Today.Date) == 0)
                     {
@@ -34,43 +68,60 @@
                     <div>No Hackathons Today</div>
                 }
             }
+
         </div>
-</div>
-    <h6>Previous Hackathons</h6>
-    <div class="card-columns">
-        @foreach (var item in Model)
-        {
-            if (item.StartDate.Date.CompareTo(DateTime.Today.Date) < 0)
+
+        <br />
+        <br />
+        <h6>Previous Hackathons</h6>
+        <br />
+        <br />
+        <div class="card-columns">
+
+            @foreach (var item in Model.Hackathons)
             {
-                <a  asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id"  >
+                if (item.StartDate.Date.CompareTo(DateTime.Today.Date) < 0)
+                {
+                    <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
 
-                <div class="card" style="max-height: 5em;">
-                    <div class="card-body">
+                        <div class="card" style="max-height: 5em;">
+                            <div class="card-img" style="background-image:@item.Thumbnail"></div>
+                            <div class="card-body">
 
-                        <h5 class="card-title">@item.Title</h5>
-                    </div>
+                                <h5 class="card-title">@item.Title  </h5>
+                            </div>
 
-                </div>
-            </a>
+                        </div>
+                    </a>
+                }
             }
-        }
-    </div>
 
-    <h6>Next Hackathons</h6>
-    <div class="card-columns">
-        @foreach (var item in Model)
-        {
-            if (item.StartDate.Date.CompareTo(DateTime.Today.Date) > 0)
+        </div>
+        <br />
+        <br />
+
+        <h6>Next Hackathons</h6>
+        <br />
+        <br />
+        <div class="card-columns">
+
+            @foreach (var item in Model.Hackathons)
             {
-                <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                <div class="card" style="height: 6em;">
-                    <div class="card-body">
+                if (item.StartDate.Date.CompareTo(DateTime.Today.Date) > 0)
+                {
+                    <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
+                        <div class="card" style="height: 6em;">
+                            <div class="card-body">
 
-                        <h5 class="card-title">@item.Title</h5>
-                    </div>
+                                <h5 class="card-title">@item.Title</h5>
+                            </div>
 
-                </div>
-        </a>
-        }
-    }
-</div>
+                        </div>
+                    </a>
+                }
+            }
+
+        </div>
+        <br />
+        <br />
+    </div>

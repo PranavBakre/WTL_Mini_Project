@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HackUniverse.Models;
+using HackUniverse.Models.Hackathon_User_Interactions;
 using HackUniverse.Models.ProblemStatements;
+using HackUniverse.Models.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +32,12 @@ namespace HackUniverse
                 new HackathonContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Add(new ServiceDescriptor(typeof(ProblemStatementContext),
                 new ProblemStatementContext(Configuration.GetConnectionString("DefaultConnection"))));
+            services.Add(new ServiceDescriptor(typeof(UserContext),
+                new UserContext(Configuration.GetConnectionString("DefaultConnection"))));
+            services.Add(new ServiceDescriptor(typeof(Hackathon_UserContext),
+                new Hackathon_UserContext(Configuration.GetConnectionString("DefaultConnection"))));
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(30));
+            services.Configure<CookiePolicyOptions>(options => options.CheckConsentNeeded = context=> false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +53,12 @@ namespace HackUniverse
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
             
             app.UseEndpoints(endpoints =>

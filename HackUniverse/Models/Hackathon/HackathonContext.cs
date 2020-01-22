@@ -43,12 +43,13 @@ namespace HackUniverse.Models
                         ContactPhone = read["ContactPhone"].ToString(),
                         ContactWebsite = read["ContactWebsite"].ToString(),
                         CoverPhoto = utilities.ObjecttoByteArray(read["CoverPhoto"]),
-                        Thumbnail = utilities.ObjecttoByteArray(read["Thumbnail"]),
+                        Thumbnail = //read["Thumbnail"].ToString(),
+                        utilities.ObjecttoByteArray(read["Thumbnail"]),
+                        //read.GetString("Thumbnail"),
                         StartDate = (System.DateTime)read["StartDate"],
                         EndDate = (System.DateTime)read["EndDate"]
                     };
                 }
-                connection.Close();
             }
         }
 
@@ -64,7 +65,9 @@ namespace HackUniverse.Models
                 {
                     while (reader.Read())
                     {
-                        list.Add(new Hackathon()
+                        Hackathon h;
+
+                        h = new Hackathon()
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             Title = reader["Title"].ToString(),
@@ -79,7 +82,19 @@ namespace HackUniverse.Models
                             EndDate = (System.DateTime)reader["EndDate"]
 
 
-                        });
+                        };
+                        //try
+                        //{
+                        //    h.Thumbnail = //utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                        //    //reader["Thumbnail"].ToString(),
+                        //    reader.GetString("Thumbnail");
+                            
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    h.Thumbnail = "";
+                        //}
+                        list.Add(h);
                     }
                     conn.Close();
                 }

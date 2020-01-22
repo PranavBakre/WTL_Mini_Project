@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Register";
 }
 
@@ -12,7 +11,7 @@
 </script>
 
 
-<form name="register" style="min-height: 300px;width:320px;" class="mx-auto my-auto card" asp-controller="User" asp-action="Register" method="post">
+<form name="register" style="min-height: 300px;width:320px;" class="mx-auto my-auto card" asp-controller="User" asp-action="Register" method="get">
     
     <div id="R1" class="card-body" style="margin-top:15%;text-align:center">
         <div class="card-title"><h3>Register</h3></div>
@@ -26,11 +25,11 @@
             <br />
             <br />
             <h6>Password</h6>
-            <input style="width:100%" type="password" placeholder="Password" name="password" />
+            <input style="width:100%" type="password" placeholder="Password" id="password" name="password" />
             <br />
             <br />
             <h6>Confirm Password</h6>
-            <input style="width:100%" type="password" placeholder="Confirm" name="Verify" />
+            <input style="width:100%" type="password" placeholder="Confirm" id="Verify" />
             <br />
             <br />
             <button class="btn btn-primary" type="button" onclick="return NextPage()">Next</button>
@@ -53,6 +52,9 @@
         <h6>Organization Name:</h6>
         <input style="width:100%" type="text" name="OrganizationName" />
         <br />
+        <h6>Phone Number:</h6>
+        <input style="width:100%" type="tel" name="ContactPhone" />
+        <br />
         <h6>Profile Picture:</h6>
         <input style="width:100%" type="file" accept="image/*" name="ProfilePicture" />
         <br />
@@ -64,8 +66,8 @@
         <br />
         <br />
         <br />
-        
-        <input class="btn btn-primary"type="submit" name="submit" />
+
+        <input class="btn btn-primary" type="submit" name="submit" />
         <br />
-        </div>
+    </div>
 </form>
