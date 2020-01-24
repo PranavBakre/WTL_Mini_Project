@@ -14,18 +14,25 @@ namespace HackUniverse.Models.Hackathon_User_Interactions
         {
             ConnectionString = connectionString;
         }
-
         private MySqlConnection GetConnecton()
         {
             return new MySqlConnection(ConnectionString);
         }
-
-        //public bool AddHackathon(dynamic UserHandle)
-        //{
-        //    string query;
-        //    if (UserHandle.Profile.)
-        //}
-
+        public bool register(dynamic UserHandle,int hid,int pid)
+        {   string query;
+            if (UserHandle.Profile.Type != 'P')
+            {
+                return false;
+            }
+                       
+            query=$"insert into hackathon_participant (username,HackathonID,statementID) values ('{UserHandle.User.UserName}','{hid}',''{pid})";
+            using( var connection = GetConnecton())
+            {
+                connection.Open();
+                var command = new MySqlCommand(query, connection);
+                return command.ExecuteNonQuery()>0?true:false;
+            }
+        }
         public List<int> GetUserHackathons(dynamic UserHandle)
         {
             string query;

@@ -15,8 +15,11 @@
         <div style="text-align:center;display: inline-flex;width:100%">
             <div style="text-align:left;width:30%"><b>Start Date : </b>@Model.Hackathon.StartDate</div>
             <div style="width:40%">
-                <button class="btn btn-primary">Register</button>
-
+                <!--<button class="btn btn-primary">Register</button>-->
+        
+        <a class="btn btn-primary" asp-controller="Hackathon"  asp-action="Register" asp-route-hid="@Model.Hackathon.Id" 
+>Register</a>
+        
             </div>
             <div style="text-align:right;width:30%"><b>End Date : </b>@Model.Hackathon.EndDate</div>
         </div>
