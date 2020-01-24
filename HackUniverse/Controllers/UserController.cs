@@ -23,10 +23,12 @@ namespace HackUniverse.Controllers
 
             UserContext context = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
             var loginSuccess = context.LoginRequest(username, password);
+            var user = context.GetUserByUserName(username);
             if (loginSuccess)
             {
                 
                 HttpContext.Session.SetString("UName",username);
+                HttpContext.Session.SetString("Type", $"{user.Profile.Type}");
                 return Redirect("~/Home/Index");
             }
             return Redirect("~/Home/Login");

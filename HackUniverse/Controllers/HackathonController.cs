@@ -10,7 +10,6 @@ using HackUniverse.Models.ProblemStatements;
 using System.Dynamic;
 namespace HackUniverse.Controllers
 {
-    [Route("api/[controller]")]
     public class HackathonController : Controller
     {
 
@@ -26,7 +25,10 @@ namespace HackUniverse.Controllers
         }
 
 
-
+        public IActionResult Add(string username)
+        {
+            return View(username);
+        }
 
         public IActionResult Index(int hid)
         {

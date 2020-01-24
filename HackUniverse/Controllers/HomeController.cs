@@ -26,6 +26,7 @@ namespace HackUniverse.Controllers
         public IActionResult Index()
         {
             ViewData["Name"]=HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
             UserContext userContext = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
             HackathonContext context = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
             Hackathon_UserContext HuContext = HttpContext.RequestServices.GetService(typeof(Hackathon_UserContext)) as Hackathon_UserContext;

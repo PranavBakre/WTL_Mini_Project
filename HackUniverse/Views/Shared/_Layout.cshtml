@@ -30,14 +30,24 @@
                         }
                         else
                         {
-                                
+
                                     <li class="nav-item dropdown" style="width:10%;text-align:right;">
-                                        
-                                        <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="" asp-action="">@ViewData["Name"]</a>
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                            @ViewData["Name"]
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            @if (ViewData["Type"].ToString() == "C")
+                                            {
+                                                <a class="nav-link dropdown-item" asp-area="" asp-controller="Hackathon" asp-action="Add" asp-route-username="@ViewData["Name"]">Add Hackathon</a>
+                                               
+                                             }
+                                            
+                                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+
+                                        </div>
                                     </li>
-                                    <li class="nav-item" style="width:10%;text-align:right;">
-                                        <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
-                                    </li>
+                                    
                         }
                         <li>
                             <a class="navbar-toggler nav-link text-dark" data-toggle="collapse" data-target="#Search" aria-expanded="false">Search</a>

@@ -22,7 +22,8 @@
                     {
 
                         <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                            <div class="card" style="max-height: 5em;">
+                            <div class="card">
+                                <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                                 <div class="card-body">
 
                                     <h5 class="card-title">@item.Title</h5>
@@ -50,8 +51,10 @@
                 {
                     counter++;
                     <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                        <div class="card" style="max-height: 5em;">
+                        <div class="card" >
+                            <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                             <div class="card-body">
+
                                 <h5 class="card-title">@item.Title</h5>
                             </div>
                         </div>
@@ -76,8 +79,8 @@
             @foreach (var item in Model.PreviousHackathons)
             {
                 <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                    <div class="card" style="max-height: 5em;">
-                        <div class="card-img" style="background-image:@item.Thumbnail"></div>
+                    <div class="card">
+                        <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                         <div class="card-body">
                             <h5 class="card-title">@item.Title  </h5>
                         </div>
@@ -97,8 +100,10 @@
             @foreach (var item in Model.NextHackathons)
             {
                 <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                    <div class="card" style="height: 6em;">
+                    <div class="card" >
+                        <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                         <div class="card-body">
+
                             <h5 class="card-title">@item.Title</h5>
                         </div>
                     </div>
