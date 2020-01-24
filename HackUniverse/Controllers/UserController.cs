@@ -41,5 +41,12 @@ namespace HackUniverse.Controllers
             }
             return Redirect("~/Home/Register");
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return Redirect("~/Home");
+        }
+
+
     }
 }

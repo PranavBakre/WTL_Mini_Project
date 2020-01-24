@@ -30,10 +30,13 @@
                         }
                         else
                         {
-                            <li class="nav-item" style="width:10%;text-align:right">
-                                <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="" asp-action="">@ViewData["Name"]</a>
-                            </li>
 
+                                    <li class="nav-item" style="width:10%;text-align:right;">
+                                        <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="" asp-action="">@ViewData["Name"]</a>
+                                    </li>
+                                    <li class="nav-item" style="width:10%;text-align:right;">
+                                        <a class="nav-link text-dark mx-auto" asp-area="" asp-controller="User" asp-action="Logout">Logout</a>
+                                    </li>
                         }
                         <li>
                             <a class="navbar-toggler nav-link text-dark" data-toggle="collapse" data-target="#Search" aria-expanded="false">Search</a>

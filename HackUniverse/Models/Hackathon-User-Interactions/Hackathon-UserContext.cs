@@ -20,6 +20,12 @@ namespace HackUniverse.Models.Hackathon_User_Interactions
             return new MySqlConnection(ConnectionString);
         }
 
+        //public bool AddHackathon(dynamic UserHandle)
+        //{
+        //    string query;
+        //    if (UserHandle.Profile.)
+        //}
+
         public List<int> GetUserHackathons(dynamic UserHandle)
         {
             string query;
