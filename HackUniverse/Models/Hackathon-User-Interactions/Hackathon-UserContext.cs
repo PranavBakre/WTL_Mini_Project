@@ -18,21 +18,49 @@ namespace HackUniverse.Models.Hackathon_User_Interactions
         {
             return new MySqlConnection(ConnectionString);
         }
-        public bool register(dynamic UserHandle,int hid,int pid)
-        {   string query;
+
+        public bool AddHackathon(dynamic UserHandle,Hackathon hackathon)
+        {
+            string query;
+            if (UserHandle.User.Type != 'C')
+            {
+                return false;
+            }
+            query = $"insert into hackathon(Title,Subtitle,Description,ContactMail,ContactPhone,ContactWebsite,CoverPhoto,ThumbNail,StartDate,EndDate)" +
+                $" values('{hackathon.Title}','{hackathon.Subtitle}','{hackathon.Description}','{hackathon.ContactMail}'," +
+                $"'{hackathon.ContactPhone}','{hackathon.ContactWebsite}','{hackathon.CoverPhoto}','{hackathon.Thumbnail}','{hackathon.StartDate}'" +
+                $",'{hackathon.EndDate}')";
+            using (var connection=GetConnecton())
+            {
+                connection.Open();
+                var command = new MySqlCommand(query,connection);
+                if (command.ExecuteNonQuery()>0)  {
+                    query = $"insert into hackathon_creator (Username,HackathonId) values ('{UserHandle.User.UserName}','{hackathon.Id}')";
+                    command = new MySqlCommand(query,connection);
+                    return command.ExecuteNonQuery() > 0 ? true : false;
+                };
+            }
+
+            return false;
+        }
+
+        public bool Register(dynamic UserHandle, int hid, int pid)
+        {
+            string query;
             if (UserHandle.Profile.Type != 'P')
             {
                 return false;
             }
-                       
-            query=$"insert into hackathon_participant (username,HackathonID,statementID) values ('{UserHandle.User.UserName}','{hid}',''{pid})";
-            using( var connection = GetConnecton())
+
+            query = $"insert into hackathon_participant (username,HackathonID,statementID) values ('{UserHandle.User.UserName}','{hid}',''{pid})";
+            using (var connection = GetConnecton())
             {
                 connection.Open();
                 var command = new MySqlCommand(query, connection);
-                return command.ExecuteNonQuery()>0?true:false;
+                return command.ExecuteNonQuery() > 0 ? true : false;
             }
         }
+
         public List<int> GetUserHackathons(dynamic UserHandle)
         {
             string query;
