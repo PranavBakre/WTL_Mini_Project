@@ -45,7 +45,9 @@ namespace HackUniverse.Controllers
             
             dynamic Model = new ExpandoObject();
             Model.UserHackathonList=UserHackathons ;
-            Model.Hackathons = context.GetAllHackathons();
+            Model.NextHackathons = context.GetNextHackathons();
+            Model.PreviousHackathons = context.GetPreviousHackathons();
+            Model.CurrentHackathons = context.GetCurrentHackathons();
             return View(Model);
         }
 

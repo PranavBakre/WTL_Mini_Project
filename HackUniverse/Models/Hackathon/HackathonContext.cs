@@ -54,12 +54,161 @@ namespace HackUniverse.Models
         }
 
 
-        public List<Hackathon> GetAllHackathons()
+/*        public List<Hackathon> GetAllHackathons()
         {
             var list = new List<Hackathon>();
             using (MySqlConnection conn = GetConnecton()) {
                 conn.Open();
                 MySqlCommand cmd = new MySqlCommand("select * from Hackathon", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Hackathon h;
+
+                        h = new Hackathon()
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Title = reader["Title"].ToString(),
+                            Subtitle = reader["Subtitle"].ToString(),
+                            Description = reader["Description"].ToString(),
+                            ContactMail = reader["ContactMail"].ToString(),
+                            ContactPhone = reader["ContactPhone"].ToString(),
+                            ContactWebsite = reader["ContactWebsite"].ToString(),
+                            CoverPhoto = utilities.ObjecttoByteArray(reader["CoverPhoto"]),
+                            Thumbnail = utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                            StartDate = (System.DateTime)reader["StartDate"],
+                            EndDate = (System.DateTime)reader["EndDate"]
+
+
+                        };
+                        //try
+                        //{
+                        //    h.Thumbnail = //utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                        //    //reader["Thumbnail"].ToString(),
+                        //    reader.GetString("Thumbnail");
+                            
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    h.Thumbnail = "";
+                        //}
+                        list.Add(h);
+                    }
+                    conn.Close();
+                }
+            }
+            return list;
+        }
+
+    }
+
+    
+}
+*/
+        public List<Hackathon> GetPreviousHackathons()
+        {
+            var list = new List<Hackathon>();
+            using (MySqlConnection conn = GetConnecton()) {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from Hackathon where date(enddate)<current_date order by enddate desc limit 12", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Hackathon h;
+
+                        h = new Hackathon()
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Title = reader["Title"].ToString(),
+                            Subtitle = reader["Subtitle"].ToString(),
+                            Description = reader["Description"].ToString(),
+                            ContactMail = reader["ContactMail"].ToString(),
+                            ContactPhone = reader["ContactPhone"].ToString(),
+                            ContactWebsite = reader["ContactWebsite"].ToString(),
+                            CoverPhoto = utilities.ObjecttoByteArray(reader["CoverPhoto"]),
+                            Thumbnail = utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                            StartDate = (System.DateTime)reader["StartDate"],
+                            EndDate = (System.DateTime)reader["EndDate"]
+
+
+                        };
+                        //try
+                        //{
+                        //    h.Thumbnail = //utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                        //    //reader["Thumbnail"].ToString(),
+                        //    reader.GetString("Thumbnail");
+                            
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    h.Thumbnail = "";
+                        //}
+                        list.Add(h);
+                    }
+                    conn.Close();
+                }
+            }
+            return list;
+        }
+
+        public List<Hackathon> GetNextHackathons()
+        {
+            var list = new List<Hackathon>();
+            using (MySqlConnection conn = GetConnecton()) {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from Hackathon where date(startdate)>current_date order by startdate asc limit 12", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Hackathon h;
+
+                        h = new Hackathon()
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Title = reader["Title"].ToString(),
+                            Subtitle = reader["Subtitle"].ToString(),
+                            Description = reader["Description"].ToString(),
+                            ContactMail = reader["ContactMail"].ToString(),
+                            ContactPhone = reader["ContactPhone"].ToString(),
+                            ContactWebsite = reader["ContactWebsite"].ToString(),
+                            CoverPhoto = utilities.ObjecttoByteArray(reader["CoverPhoto"]),
+                            Thumbnail = utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                            StartDate = (System.DateTime)reader["StartDate"],
+                            EndDate = (System.DateTime)reader["EndDate"]
+
+
+                        };
+                        //try
+                        //{
+                        //    h.Thumbnail = //utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                        //    //reader["Thumbnail"].ToString(),
+                        //    reader.GetString("Thumbnail");
+                            
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    h.Thumbnail = "";
+                        //}
+                        list.Add(h);
+                    }
+                    conn.Close();
+                }
+            }
+            return list;
+        }
+
+        public List<Hackathon> GetCurrentHackathons()
+        {
+            var list = new List<Hackathon>();
+            using (MySqlConnection conn = GetConnecton()) {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("select * from Hackathon where date(startdate)<=current_date and date(enddate)>=current_date order by startdate asc limit 12", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
