@@ -53,60 +53,89 @@ namespace HackUniverse.Models
             }
         }
 
-
-/*        public List<Hackathon> GetAllHackathons()
+        public Hackathon GetByName(string title)
         {
-            var list = new List<Hackathon>();
-            using (MySqlConnection conn = GetConnecton()) {
-                conn.Open();
-                MySqlCommand cmd = new MySqlCommand("select * from Hackathon", conn);
-
-                using (var reader = cmd.ExecuteReader())
+            using (MySqlConnection connection = GetConnecton())
+            {
+                connection.Open();
+                var cmd = new MySqlCommand($"select * from Hackathon where Title='{title}'", connection);
+                using (var read = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    read.Read();
+                    return new Hackathon
                     {
-                        Hackathon h;
-
-                        h = new Hackathon()
-                        {
-                            Id = Convert.ToInt32(reader["Id"]),
-                            Title = reader["Title"].ToString(),
-                            Subtitle = reader["Subtitle"].ToString(),
-                            Description = reader["Description"].ToString(),
-                            ContactMail = reader["ContactMail"].ToString(),
-                            ContactPhone = reader["ContactPhone"].ToString(),
-                            ContactWebsite = reader["ContactWebsite"].ToString(),
-                            CoverPhoto = utilities.ObjecttoByteArray(reader["CoverPhoto"]),
-                            Thumbnail = utilities.ObjecttoByteArray(reader["Thumbnail"]),
-                            StartDate = (System.DateTime)reader["StartDate"],
-                            EndDate = (System.DateTime)reader["EndDate"]
-
-
-                        };
-                        //try
-                        //{
-                        //    h.Thumbnail = //utilities.ObjecttoByteArray(reader["Thumbnail"]),
-                        //    //reader["Thumbnail"].ToString(),
-                        //    reader.GetString("Thumbnail");
-                            
-                        //}
-                        //catch (Exception ex)
-                        //{
-                        //    h.Thumbnail = "";
-                        //}
-                        list.Add(h);
-                    }
-                    conn.Close();
+                        Id = Convert.ToInt32(read["Id"].ToString()),
+                        Title = read["Title"].ToString(),
+                        Subtitle = read["Subtitle"].ToString(),
+                        Description = read["Description"].ToString(),
+                        ContactMail = read["ContactMail"].ToString(),
+                        ContactPhone = read["ContactPhone"].ToString(),
+                        ContactWebsite = read["ContactWebsite"].ToString(),
+                        CoverPhoto = utilities.ObjecttoByteArray(read["CoverPhoto"]),
+                        Thumbnail = //read["Thumbnail"].ToString(),
+                        utilities.ObjecttoByteArray(read["Thumbnail"]),
+                        //read.GetString("Thumbnail"),
+                        StartDate = (System.DateTime)read["StartDate"],
+                        EndDate = (System.DateTime)read["EndDate"]
+                    };
                 }
             }
-            return list;
         }
 
-    }
 
-    
-}
-*/
+        /*        public List<Hackathon> GetAllHackathons()
+                {
+                    var list = new List<Hackathon>();
+                    using (MySqlConnection conn = GetConnecton()) {
+                        conn.Open();
+                        MySqlCommand cmd = new MySqlCommand("select * from Hackathon", conn);
+
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Hackathon h;
+
+                                h = new Hackathon()
+                                {
+                                    Id = Convert.ToInt32(reader["Id"]),
+                                    Title = reader["Title"].ToString(),
+                                    Subtitle = reader["Subtitle"].ToString(),
+                                    Description = reader["Description"].ToString(),
+                                    ContactMail = reader["ContactMail"].ToString(),
+                                    ContactPhone = reader["ContactPhone"].ToString(),
+                                    ContactWebsite = reader["ContactWebsite"].ToString(),
+                                    CoverPhoto = utilities.ObjecttoByteArray(reader["CoverPhoto"]),
+                                    Thumbnail = utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                                    StartDate = (System.DateTime)reader["StartDate"],
+                                    EndDate = (System.DateTime)reader["EndDate"]
+
+
+                                };
+                                //try
+                                //{
+                                //    h.Thumbnail = //utilities.ObjecttoByteArray(reader["Thumbnail"]),
+                                //    //reader["Thumbnail"].ToString(),
+                                //    reader.GetString("Thumbnail");
+
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    h.Thumbnail = "";
+                                //}
+                                list.Add(h);
+                            }
+                            conn.Close();
+                        }
+                    }
+                    return list;
+                }
+
+            }
+
+
+        }
+        */
         public List<Hackathon> GetPreviousHackathons()
         {
             var list = new List<Hackathon>();

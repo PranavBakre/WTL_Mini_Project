@@ -1,4 +1,5 @@
 ﻿using HackUniverse.Models.User;
+using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -33,11 +34,27 @@ namespace HackUniverse.Models.Hackathon_User_Interactions
             using (var connection=GetConnecton())
             {
                 connection.Open();
+                int id=0;
                 var command = new MySqlCommand(query,connection);
                 if (command.ExecuteNonQuery()>0)  {
-                    query = $"insert into hackathon_creator (Username,HackathonId) values ('{UserHandle.User.UserName}','{hackathon.Id}')";
-                    command = new MySqlCommand(query,connection);
-                    return command.ExecuteNonQuery() > 0 ? true : false;
+
+                    query = $"select id from hackathon where Title='{hackathon.Title}'";
+                    command = new MySqlCommand(query, connection);
+                    using (var read = command.ExecuteReader())
+                    {
+                        while (read.Read())
+                        {
+                            id = Convert.ToInt32(read["id"]);
+                        }
+                    }
+                    if (id != 0)
+                    {
+                        query = $"insert into hackathon_creator (Username,HackathonId) values ('{UserHandle.User.UserName}','{id}')";
+                        command = new MySqlCommand(query, connection);
+
+                        return command.ExecuteNonQuery() > 0 ? true : false;
+                    }
+                    return false;
                 };
             }
 
