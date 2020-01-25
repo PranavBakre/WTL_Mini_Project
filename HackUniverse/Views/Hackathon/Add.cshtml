@@ -1,34 +1,38 @@
-﻿
+﻿@model dynamic
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Add Hackathon";
 }
 
-<div>
-    <form class="card mx-auto">
-        <div class="card-title">Register Hackathon</div>
+    <form class="card mx-auto" style="min-height: 20em;width:28em; text-align:center" asp-controller="Hackathon" asp-action="AddHackathon" method="get">
+        <br />
+        <br />
+        <br />
+        <div class="card-title"><h5>Register Hackathon</h5></div>
         <div class="card-body">
-            
+            <input type="hidden" name="username" value="@Model.User.UserName" />
             <h6>Title</h6>
-            <input type="text" placeholder="Title" />
+            <input name="Title" style="width:80%" type="text" placeholder="Title" />
             <h6>Subtitle</h6>
-            <input type="text" placeholder="Subtitle" />
-            <h6>Description</h6>    
-            <textarea name="description" cols="65" rows="15" placeholder="Description"></textarea>
-            <h6>Email</h6> 
-            <input type="email" placeholder="Contact Email" />
+            <input name="Subtitle" style="width:80%" type="text" placeholder="Subtitle" />
+            <h6>Description</h6>
+            <textarea name="Description" style="width:80%" cols="35" rows="5" placeholder="Description"></textarea>
+            <h6>Email</h6>
+            <input name="Email" style="width:80%" type="email" placeholder="Contact Email" />
             <h6>Phone Number</h6>
-            <input type="text" placeholder="Contact Phone" />
+            <input name="ContactPhone" style="width:80%" type="text" placeholder="Contact Phone" />
             <h6>Website</h6>
-            <input type="text" placeholder="Contact Website" />
+            <input name="ContactWebsite" style="width:80%" type="text" placeholder="Contact Website" />
             <h6>Thumbnail</h6>
-            <input type="text" placeholder="Thumbnail" />
-            <h6>CoverPhoto</h6>    
-            <input type="file" name="pic" accept="image/*" placeholder="Cover Photo">
-            <h6>Start Date</h6>    
-            <input type="datetime" placeholder="StartDate" />
-            <h6>End Date</h6>    
-            <input type="datetime" placeholder="EndDate" />
+            <input name="Thumbnail" style="width:80%" type="file" placeholder="Thumbnail" />
+            <h6>CoverPhoto</h6>
+            <input dirname="CoverPhoto" style="width:80%" type="file" name="pic" accept="image/*" placeholder="Cover Photo">
+            <h6>Start Date</h6>
+            <input name="StartDate" style="width:80%" type="text" placeholder="StartDate" />
+            <h6>End Date</h6>
+            <input name="EndDate" style="width:80%" type="text" placeholder="EndDate" />
+            <button class="btn btn-primary" >Submit</button>
         </div>
-
+        <br />
+        <br />
+        <br />
     </form>
-</div>

@@ -8,6 +8,10 @@ using MySql.Data.MySqlClient;
 using HackUniverse.Models;
 using HackUniverse.Models.ProblemStatements;
 using System.Dynamic;
+using Microsoft.AspNetCore.Http;
+using HackUniverse.Models.Hackathon_User_Interactions;
+using HackUniverse.Models.User;
+
 namespace HackUniverse.Controllers
 {
     public class HackathonController : Controller
@@ -25,14 +29,45 @@ namespace HackUniverse.Controllers
         }
 
 
-        public IActionResult Add(string username)
+        public IActionResult Add(string user)
         {
-            return View(username);
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
+            UserContext uContext = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
+            return View(uContext.GetUserByUserName(user));
+        }
+
+        public IActionResult AddHackathon(string username, string title, string subtitle, string description, string contactMail, string contactPhone,
+            string contactWebsite, byte[] coverPhoto, byte[] thumbnail, DateTime startDate, DateTime endDate)
+        {
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
+
+            Hackathon_UserContext hucontext = HttpContext.RequestServices.GetService(typeof(Hackathon_UserContext)) as Hackathon_UserContext;
+            UserContext uContext = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
+
+            if (hucontext.AddHackathon(uContext.GetUserByUserName(username),new Hackathon{
+                Title=title,
+                Subtitle=subtitle,
+                Description=description,
+                ContactMail=contactMail,
+                ContactPhone=contactPhone,
+                ContactWebsite=contactWebsite,
+                CoverPhoto=coverPhoto,
+                Thumbnail=thumbnail,
+                StartDate=startDate,
+                EndDate=endDate
+            }))
+            {
+                return Redirect("~/Hackathon/AddProblemStatements");
+            }
+            return Redirect("~/Hackathon/Add");
         }
 
         public IActionResult Index(int hid)
         {
-            
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
             TempData["id"] =hid;
             HackathonContext hackathonContext = HttpContext.RequestServices.GetService(typeof(HackathonContext)) as HackathonContext;
             Hackathon Selection = hackathonContext.GetByID(hid);

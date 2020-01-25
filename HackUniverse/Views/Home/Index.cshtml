@@ -22,7 +22,7 @@
                     {
 
                         <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                            <div class="card">
+                            <div class="card mx-auto">
                                 <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                                 <div class="card-body">
 
@@ -51,7 +51,7 @@
                 {
                     counter++;
                     <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                        <div class="card" >
+                        <div class="card mx-auto" >
                             <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                             <div class="card-body">
 
@@ -79,7 +79,7 @@
             @foreach (var item in Model.PreviousHackathons)
             {
                 <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                    <div class="card">
+                    <div class="card mx-auto">
                         <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                         <div class="card-body">
                             <h5 class="card-title">@item.Title  </h5>
@@ -100,7 +100,7 @@
             @foreach (var item in Model.NextHackathons)
             {
                 <a asp-controller="Hackathon" asp-action="Index" asp-route-hid="@item.Id">
-                    <div class="card" >
+                    <div class="card mx-auto" >
                         <img class="card-img" src='~/Images/Hackathons/thumb@(item.Id).png' style="height:10em;width:10em" />
                         <div class="card-body">
 

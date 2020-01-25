@@ -20,7 +20,7 @@ namespace HackUniverse.Controllers
 
         public IActionResult Login(string username,string password)
         {
-
+            
             UserContext context = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
             var loginSuccess = context.LoginRequest(username, password);
             var user = context.GetUserByUserName(username);
@@ -36,6 +36,7 @@ namespace HackUniverse.Controllers
         public IActionResult Register(string username,string email,string password, string FirstName,string LastName, string Occupation,
             string OrganizationName,string ContactPhone,object ProfilePicture,char UserType)
         {
+            
             UserContext uContext = HttpContext.RequestServices.GetService(typeof(UserContext)) as UserContext;
             if (uContext.RegisterUser(username, password, email, FirstName, LastName, Occupation, OrganizationName,ContactPhone, ProfilePicture, UserType) == true)
             {

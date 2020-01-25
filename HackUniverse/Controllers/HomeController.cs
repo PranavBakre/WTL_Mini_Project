@@ -55,22 +55,37 @@ namespace HackUniverse.Controllers
 
         public IActionResult Login()
         {
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
+            if (ViewData["Name"] != null)
+            {
+                return Redirect("~/Home/Index");
+            }
             return View();
         }
 
         public IActionResult Register()
         {
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
+            if (ViewData["Name"] != null)
+            {
+                return Redirect("~/Home/Index");
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
             return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

@@ -22,7 +22,7 @@ namespace HackUniverse.Models.Hackathon_User_Interactions
         public bool AddHackathon(dynamic UserHandle,Hackathon hackathon)
         {
             string query;
-            if (UserHandle.User.Type != 'C')
+            if (UserHandle.Profile.Type != 'C')
             {
                 return false;
             }
