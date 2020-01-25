@@ -24,6 +24,39 @@ namespace HackUniverse.Models
             return new MySqlConnection(ConnectionString);
         }
 
+        public List<Hackathon> Search(string S)
+        {
+            List<Hackathon> list=new List<Hackathon>();
+            using (MySqlConnection connection = GetConnecton())
+            {
+                connection.Open();
+                var cmd = new MySqlCommand($"select * from Hackathon  where match(title, subtitle) against('{S}');", connection);
+                using (var read = cmd.ExecuteReader())
+                {
+                    while (read.Read())
+                    {
+                       list.Add(new Hackathon
+                        {
+                            Id = Convert.ToInt32(read["Id"].ToString()),
+                            Title = read["Title"].ToString(),
+                            Subtitle = read["Subtitle"].ToString(),
+                            Description = read["Description"].ToString(),
+                            ContactMail = read["ContactMail"].ToString(),
+                            ContactPhone = read["ContactPhone"].ToString(),
+                            ContactWebsite = read["ContactWebsite"].ToString(),
+                            CoverPhoto = utilities.ObjecttoByteArray(read["CoverPhoto"]),
+                            Thumbnail = //read["Thumbnail"].ToString(),
+                            utilities.ObjecttoByteArray(read["Thumbnail"]),
+                            //read.GetString("Thumbnail"),
+                            StartDate = (System.DateTime)read["StartDate"],
+                            EndDate = (System.DateTime)read["EndDate"]
+                        });
+                    }
+                }
+            }
+            return list;
+        }
+
         public Hackathon GetByID(int id)
         {
             using (MySqlConnection connection = GetConnecton())

@@ -59,10 +59,14 @@ namespace HackUniverse.Controllers
                 EndDate=endDate
             }))
             {
-                return Redirect("~/Hackathon/AddProblemStatements");
+                return Redirect("~/Home");
+                //return Redirect($"~/Hackathon/AddProblemStatements");
             }
             return Redirect("~/Hackathon/Add");
         }
+
+        //public IActionResult AddProblemStatements()
+
 
         public IActionResult Index(int hid)
         {

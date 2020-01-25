@@ -82,6 +82,16 @@ namespace HackUniverse.Controllers
             return View();
         }
 
+        public IActionResult Search(string S)
+        {
+            ViewData["Name"] = HttpContext.Session.GetString("UName");
+            ViewData["Type"] = HttpContext.Session.GetString("Type");
+
+            HackathonContext hContext = HttpContext.RequestServices.GetService(typeof (HackathonContext)) as HackathonContext;
+            
+            return View(hContext.Search(S));
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
